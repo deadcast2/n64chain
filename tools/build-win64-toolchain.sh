@@ -37,13 +37,12 @@ fi
 if [ ! -f stamps/binutils-configure ]; then
   pushd binutils-build
   ../binutils-source/configure \
-    --build=x86_64-linux-gnu \
+    --build=x86_64-w64-mingw32 \
     --host=x86_64-w64-mingw32 \
     --prefix="${SCRIPT_DIR}" \
     --with-lib-path="${SCRIPT_DIR}/lib" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-64-bit-bfd \
-    --enable-plugins \
     --enable-shared \
     --disable-gold \
     --disable-multilib \
@@ -119,7 +118,7 @@ fi
 if [ ! -f stamps/gcc-configure ]; then
   pushd gcc-build
   ../gcc-source/configure \
-    --build=x86_64-linux-gnu \
+    --build=x86_64-w64-mingw32 \
     --host=x86_64-w64-mingw32 \
     --prefix="${SCRIPT_DIR}" \
     --target=mips64-elf --with-arch=vr4300 \
@@ -148,7 +147,6 @@ if [ ! -f stamps/gcc-configure ]; then
     --disable-threads \
     --disable-win32-registry \
     --enable-lto \
-    --enable-plugin \
     --without-included-gettext
   popd
 
@@ -190,7 +188,7 @@ fi
 if [ ! -f stamps/make-configure ]; then
   pushd make-build
   ../make-source/configure \
-    --build=x86_64-linux-gnu \
+    --build=x86_64-w64-mingw32 \
     --host=x86_64-w64-mingw32 \
     --prefix="${SCRIPT_DIR}" \
     --disable-largefile \
