@@ -40,7 +40,6 @@ if [ ! -f stamps/binutils-configure ]; then
     --build=x86_64-w64-mingw32 \
     --host=x86_64-w64-mingw32 \
     --prefix="${SCRIPT_DIR}" \
-    --with-lib-path="${SCRIPT_DIR}/lib" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-64-bit-bfd \
     --enable-shared \
@@ -146,7 +145,6 @@ if [ ! -f stamps/gcc-configure ]; then
     --disable-symvers \
     --disable-threads \
     --disable-win32-registry \
-    --enable-lto \
     --without-included-gettext
   popd
 
@@ -163,7 +161,7 @@ fi
 
 if [ ! -f stamps/gcc-install ]; then
   pushd gcc-build
-  make install-gcc
+  make install-strip
   popd
 
   # While not necessary, this is still a good idea.
