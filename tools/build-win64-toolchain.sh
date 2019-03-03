@@ -42,12 +42,13 @@ if [ ! -f stamps/binutils-configure ]; then
     --prefix="${SCRIPT_DIR}" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-64-bit-bfd \
-    --enable-shared \
+    --disable-shared \
     --disable-gold \
     --disable-multilib \
     --disable-nls \
     --disable-rpath \
     --disable-static \
+    --disable-plugins \
     --disable-werror
   popd
 
@@ -122,11 +123,10 @@ if [ ! -f stamps/gcc-configure ]; then
     --prefix="${SCRIPT_DIR}" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-languages=c --without-headers --with-newlib \
-    --with-gnu-as=${SCRIPT_DIR}/bin/mips64-elf-as.exe \
-    --with-gnu-ld=${SCRIPT_DIR}/bin/mips64-elf-ld.exe \
+    --with-gcc --with-gnu-ld --with-gnu-as \
     --enable-checking=release \
-    --enable-shared \
-    --enable-shared-libgcc \
+    --disable-shared \
+    --disable-shared-libgcc \
     --disable-decimal-float \
     --disable-gold \
     --disable-libatomic \
@@ -145,6 +145,8 @@ if [ ! -f stamps/gcc-configure ]; then
     --disable-symvers \
     --disable-threads \
     --disable-win32-registry \
+    --disable-lto \
+    --disable-plugin \
     --without-included-gettext
   popd
 
