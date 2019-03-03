@@ -56,7 +56,7 @@ fi
 
 if [ ! -f stamps/binutils-build ]; then
   pushd binutils-build
-  make
+  make -j2
   popd
 
   touch stamps/binutils-build
@@ -153,7 +153,7 @@ fi
 
 if [ ! -f stamps/gcc-build ]; then
   pushd gcc-build
-  make all-gcc
+  make -j2
   popd
 
   touch stamps/gcc-build
@@ -199,7 +199,7 @@ fi
 
 if [ ! -f stamps/make-build ]; then
   pushd make-build
-  make
+  make -j2
   popd
 
   touch stamps/make-build
