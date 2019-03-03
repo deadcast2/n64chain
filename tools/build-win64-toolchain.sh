@@ -40,15 +40,15 @@ if [ ! -f stamps/binutils-configure ]; then
     --build=x86_64-w64-mingw32 \
     --host=x86_64-w64-mingw32 \
     --prefix="${SCRIPT_DIR}" \
+    --with-lib-path="${SCRIPT_DIR}/lib" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-64-bit-bfd \
-    --disable-shared \
+    --enable-shared \
     --disable-gold \
     --disable-multilib \
     --disable-nls \
     --disable-rpath \
     --disable-static \
-    --disable-plugins \
     --disable-werror
   popd
 
@@ -57,7 +57,7 @@ fi
 
 if [ ! -f stamps/binutils-build ]; then
   pushd binutils-build
-  make -j2
+  make -j4
   popd
 
   touch stamps/binutils-build
@@ -123,10 +123,11 @@ if [ ! -f stamps/gcc-configure ]; then
     --prefix="${SCRIPT_DIR}" \
     --target=mips64-elf --with-arch=vr4300 \
     --enable-languages=c --without-headers --with-newlib \
-    --with-gcc --with-gnu-ld --with-gnu-as \
+    --with-gnu-as=${SCRIPT_DIR}/bin/mips64-elf-as.exe \
+    --with-gnu-ld=${SCRIPT_DIR}/bin/mips64-elf-ld.exe \
     --enable-checking=release \
-    --disable-shared \
-    --disable-shared-libgcc \
+    --enable-shared \
+    --enable-shared-libgcc \
     --disable-decimal-float \
     --disable-gold \
     --disable-libatomic \
@@ -145,8 +146,7 @@ if [ ! -f stamps/gcc-configure ]; then
     --disable-symvers \
     --disable-threads \
     --disable-win32-registry \
-    --disable-lto \
-    --disable-plugin \
+    --enable-lto \
     --without-included-gettext
   popd
 
@@ -155,7 +155,7 @@ fi
 
 if [ ! -f stamps/gcc-build ]; then
   pushd gcc-build
-  make -j2
+  make -j4
   popd
 
   touch stamps/gcc-build
@@ -201,7 +201,7 @@ fi
 
 if [ ! -f stamps/make-build ]; then
   pushd make-build
-  make -j2
+  make -j4
   popd
 
   touch stamps/make-build
