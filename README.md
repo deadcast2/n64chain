@@ -8,6 +8,14 @@ The library includes basic OS functionality supporting multi-threading through h
 single MIPS 4300 CPU of the N64. Mainly written in C and MIPS assembly, it is expected to provide a
 lightweight development environment and thus requires some low-level baby sitting.
 
+## Msys2 Build Notes
+
+1. Download the 64 bit version of msys2 from https://www.msys2.org/
+2. Run mingw64 and execute `pacman -Syu`(close if required) and then `pacman -Su`
+3. Install necessary build tools `pacman -S --needed base-devel mingw-w64-x86_64-toolchain`
+4. Add `C:\msys64\mingw64\bin` to your system PATH or wherever you installed your libraries.
+5. CD into Tools and then run `./build-win64-toolchain.sh`
+
 ## Building
 
 To build the toolchain, first put your boot code named `header.bin` on the `libn64` folder. Run `build-posix64-toolchain.sh`
